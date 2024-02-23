@@ -1,0 +1,1 @@
+# admix_heritability_HE
