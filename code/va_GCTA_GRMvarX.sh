@@ -29,8 +29,8 @@ filename=admix_${model}_theta0.5_gen20_P${P}_${cov}_seed${seed}_t${t}
 filename1=admix_${model}_theta0.5_gen20_P${P}_${cov}_seed${seed}_t${t}
 
 # construct grm with my script, it will read the dosage file, and output grm
-# module load R
-# Rscript GRMvarX.R ${filename} ${plinkdir} ${grmdir}
+module load R
+Rscript GRMvarX.R ${filename} ${plinkdir} ${grmdir}
 
 # estimate va with gcta
 # feed special GRM.GZ
