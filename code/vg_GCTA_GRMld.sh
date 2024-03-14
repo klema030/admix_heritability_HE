@@ -40,12 +40,3 @@ Rscript GRMld.R ${filename} ${plinkdir} ${grmdir}
 --out ${HEdir}/${filename}.HEreg \
 --thread-num 10 \
 
-
-# estimate Vg with ganc as covariate
-# ./gcta64 --reml \
-# --grm-gz ${grmdir}/${filename} \
-# --pheno ${phenodir}/${filename1}.pheno \
-# --qcovar ${gancdir}/${filename1}.ganc \
-# --out ${remldir}/${filename}.ganc.reml \
-# --thread-num 10 \
-# --reml-no-constrain
