@@ -56,19 +56,19 @@ getmeanCI <- function(mydata){
    summarise_at(vars("vg_GRMvarX_ganc", "vg_GRMvarX_noa", "vg_GRMvarX_gcta", "vg_GRMld_ganc", "vg_GRMld_noa", "vg_GRMvarX_gcta"), meanCI)}
 
 
-filename="admix_CGF_theta0.5_gen20_grms.txt"
+filename="admix_CGF_theta0.5_gen20_cov_grms.txt"
 dat=read.table(filename, header=T)
 df_CGF=getmeanCI(dat)
 
-filename="admix_HI_theta0.5_gen20_grms.txt"
+filename="admix_HI_theta0.5_gen20_cov_grms.txt"
 dat=read.table(filename, header=T)
 df_HI=getmeanCI(dat)
 
 # OUTPUT THE FILE
-write.table(df_HI, file="admix_HI_HE_vg_grms_CI.txt",
+write.table(df_HI, file="admix_HI_HE_vg_cov_grms_CI.txt",
             quote = FALSE, sep = "\t",
             row.names = FALSE, col.names = TRUE)
-write.table(df_CGF, file="admix_CGF_HE_vg_grms_CI.txt",
+write.table(df_CGF, file="admix_CGF_HE_vg_cov_grms_CI.txt",
             quote = FALSE, sep = "\t",
             row.names = FALSE, col.names = TRUE)
 # THESE CONTAIN P=0.3, 0.6 AS WELL
@@ -185,6 +185,10 @@ write.table(CGF_HE_CI, file="admix_CGF_HE_vg_CI_P0_P9_posneg.txt",
             quote = FALSE, sep = "\t",
             row.names = FALSE, col.names = TRUE)
 
+#combine CI files with expected values from main file
+CGF_CI_cov = read.table("admix_CGF_HE_vg_CI_P0_P9_cov.txt", header = T)
+HI_CI_cov = read.table("admix_HI_HE_vg_CI_P0_P9_cov.txt", header = T)
+
 
 #combine CI files with expected values from main file
 CGF_CI_pn = read.table("admix_CGF_HE_vg_CI_P0_P9_posneg.txt", header = T)
@@ -252,6 +256,37 @@ write.table(HI_CI_grms, file="admix_HI_HE_vg_CI_P0_P9_posneg_grms.txt",
             row.names = FALSE, col.names = TRUE)
 
 ```
+
+# Combine Scaled GRMs with CI_cov file
+```{r}
+#load CI_posneg file
+CGF_CI_cov = read.table("admix_CGF_HE_vg_CI_P0_P9_cov.txt", header = T)
+HI_CI_cov = read.table("admix_HI_HE_vg_CI_P0_P9_cov.txt", header = T)
+
+#load Scaled GRMs CI
+CGF_grms = read.table("admix_CGF_HE_vg_cov_grms_CI.txt", header = T)
+HI_grms = read.table("admix_HI_HE_vg_cov_grms_CI.txt", header = T)
+
+#remove P=0.3, 0.6 for scaled grms
+CGF_grms = CGF_grms[!(CGF_grms$P %in% 0.3),]
+CGF_grms = CGF_grms[!(CGF_grms$P %in% 0.6),]
+
+HI_grms = HI_grms[!(HI_grms$P %in% 0.3),]
+HI_grms = HI_grms[!(HI_grms$P %in% 0.6),]
+
+#combine files
+CGF_CI_grms = merge(CGF_CI_cov, CGF_grms, by=c("t", "P", "cov"))
+HI_CI_grms = merge(HI_CI_cov, HI_grms, by=c("t", "P", "cov"))
+
+#output main figure 4 file
+write.table(CGF_CI_grms, file="admix_CGF_HE_vg_CI_P0_P9_cov_grms.txt",
+            quote = FALSE, sep = "\t",
+            row.names = FALSE, col.names = TRUE)
+write.table(HI_CI_grms, file="admix_HI_HE_vg_CI_P0_P9_cov_grms.txt",
+            quote = FALSE, sep = "\t",
+            row.names = FALSE, col.names = TRUE)
+```
+
 
 # get mean and CI for h2
 
