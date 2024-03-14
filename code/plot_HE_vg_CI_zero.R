@@ -47,7 +47,7 @@ fig4Awo=function(data, yobs, yexp, ylab,
                 group=interaction(P, cov),
                 color=interaction(P, cov))) +
 
-  scale_y_continuous(limits=c(0.5, 1.1)) +
+  scale_y_continuous(limits=c(0.45, 1.1)) +
   scale_linetype_manual("", 
                        breaks = c("obs",   "exp"),
                        values = c("solid",  "11"),
