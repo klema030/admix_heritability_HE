@@ -16,5 +16,5 @@ cov=${3} #pos or neg or zero
 seed=${4}
 t=${5}
 
-./va_GCTA_GRMvarX.sh ${model} ${P} ${cov} ${seed} ${t}
+./vg_GCTA_GRMvarX.sh ${model} ${P} ${cov} ${seed} ${t}
 
