@@ -17,9 +17,7 @@ P=${2} #0, 0.3, 0.6, 0.9
 cov=${3} #pos or neg
 seed=${4} #1-10
 t=${5} #0-20
-
-#if running with scaled GRMS
-grm=${6} #GRMld or GRMvarX
+grm=${6} #GRMld, GRMvarX, GRM
 
 grmdir=/home/aazaidi/klema030/AdjustedHE/output/grm/gcta/${grm}/${model}
 
