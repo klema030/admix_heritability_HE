@@ -1,1 +1,3 @@
-# admix_heritability_HE
+# Haseman-Elston Regression in Admixed Populations
+
+# Capstone project: Nicole Kleman
